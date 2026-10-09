@@ -1,34 +1,33 @@
 # 🥔 UAV Potato Foliar Disease Dataset
 
-This directory contains the dataset components, ground-truth annotations, and semantic masks for remote sensing potato disease segmentation (Early Blight and Late Blight).
+This directory contains the downloaded UAV dataset images, polygonal annotations, and ground-truth semantic masks for the **MiT-B3 + U-Net** potato disease segmentation model.
 
 ---
 
-## 📊 Dataset Specifications
+## 📊 Dataset Overview
 
-- **Platform:** DJI Phantom 4 Pro / Mavic 3 Enterprise UAV
-- **Sensor:** RGB High-Resolution Optical Sensor (20 MP, 1-inch CMOS)
+- **Platform:** DJI UAV (RGB High-Resolution Optical Sensor, 20 MP, 1-inch CMOS)
 - **Flight Altitudes:** Multi-altitude regime: **2m, 7m, 10m, and 12m** Above Ground Level (AGL)
 - **Ground Sampling Distance (GSD):**
-  - **2m:** ~0.05 cm/pixel (ultra-fine leaf lesion diagnostics)
-  - **7m:** ~0.19 cm/pixel (standard canopy-level scouting)
-  - **10m:** ~0.27 cm/pixel (wide-area canopy scouting)
-  - **12m:** ~0.33 cm/pixel (rapid broad-acre reconnaissance)
-- **Primary Disease Target:** Potato Late Blight (*Phytophthora infestans*) and Early Blight (*Alternaria solani*)
+  - **2m:** ~0.05 cm/pixel
+  - **7m:** ~0.19 cm/pixel
+  - **10m:** ~0.27 cm/pixel
+  - **12m:** ~0.33 cm/pixel
+- **Target Diseases:** Potato Early Blight (*Alternaria solani*) and Late Blight (*Phytophthora infestans*)
 
 ---
 
 ## 🏷️ Class Definitions & Pixel Encoding
 
-Semantic segmentation masks are single-channel 8-bit PNG images where pixel intensities correspond to:
+Semantic segmentation masks are single-channel 8-bit PNG images where pixel values represent:
 
 | Class ID | Class Name | Color Representation | Description |
 |:---:|:---|:---:|:---|
-| **0** | **Soil / Background** | Black `(0, 0, 0)` | Exposed soil, mulch, furrows, shadows, non-vegetative area |
-| **1** | **Healthy Foliage** | Green `(0, 255, 0)` | Asymptomatic potato canopy leaves and stems |
-| **2** | **Early Blight** | Orange `(255, 140, 0)` | Target-board concentric ring lesions (*Alternaria solani*) |
-| **3** | **Late Blight** | Red `(255, 0, 0)` | Water-soaked dark necrotic lesions (*Phytophthora infestans*) |
-| **255** | **Ignore / Uncertain** | Cyan `(0, 220, 250)` | Deep shadows, high-uncertainty foliage boundaries |
+| **0** | **Soil / Background** | Black `(0, 0, 0)` | Exposed soil, mulch, furrows, shadows |
+| **1** | **Healthy Foliage** | Green `(0, 255, 0)` | Healthy potato canopy leaves |
+| **2** | **Early Blight** | Orange `(255, 140, 0)` | Concentric ring spots (*Alternaria solani*) |
+| **3** | **Late Blight** | Red `(255, 0, 0)` | Necrotic lesions (*Phytophthora infestans*) |
+| **255** | **Ignore / Uncertain** | Cyan `(0, 220, 250)` | Deep shadow boundaries ($V < 35$) |
 
 ---
 
@@ -36,31 +35,22 @@ Semantic segmentation masks are single-channel 8-bit PNG images where pixel inte
 
 ```text
 dataset/
-├── raw_coco/                      # Offline COCO JSON annotations & high-res drone images
-│   ├── _annotations.coco.json    # Standard COCO polygonal annotation file (293 annotations)
-│   ├── DJI_0031_JPG...jpg        # Multi-angle field images
-│   └── README.roboflow.txt       # Export provenance metadata
-├── masks/                         # Converted 8-bit single-channel semantic ground-truth masks
-│   ├── DJI_0031_JPG...png
-│   └── ...
-└── download_full_dataset.py       # Auto-downloader for full ~1GB training set from Roboflow
+├── images/                   # Drone images (.jpg)
+├── masks/                    # Ground-truth semantic masks (.png)
+├── _annotations.coco.json    # COCO polygonal annotations
+└── README.md                 # Dataset overview
 ```
 
 ---
 
-## ⚡ How to Download the Complete Dataset
+## 📥 Dataset Download Links (from Roboflow)
 
-To pull the full training dataset (~1.02 GB) directly from Roboflow into your local environment:
+If you are running the notebook in Google Colab, both splits are downloaded directly inside the notebook via:
 
 ```bash
-# Download Evaluation dataset (24 MB)
-python dataset/download_full_dataset.py --split eval
+# Evaluation Dataset (24 MB)
+curl -L "https://app.roboflow.com/ds/VGsAVnyfVC?key=dU3gqpLHoj" > roboflow_eval.zip
 
-# Download Full Training dataset (~1 GB)
-python dataset/download_full_dataset.py --split train
-
-# Or download everything at once:
-python dataset/download_full_dataset.py --split all
+# Full Training Dataset (~1.02 GB)
+curl -L "https://app.roboflow.com/ds/GKJqAZBaee?key=zTTGuI7Hdv" > roboflow_train.zip
 ```
-
-The script will automatically unzip the files into `data/train_raw` and `data/eval_raw` and generate pixel masks into `data/train/masks` and `data/eval/masks`.
