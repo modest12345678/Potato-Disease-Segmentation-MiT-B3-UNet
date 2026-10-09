@@ -1,12 +1,21 @@
 # 🥔 Potato Disease Semantic Segmentation (MiT-B3 + U-Net)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/modest12345678/Potato-Disease-Segmentation-MiT-B3-UNet?color=orange)](https://github.com/modest12345678/Potato-Disease-Segmentation-MiT-B3-UNet/releases/tag/v1.0.0)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/modest12345678/Potato-Disease-Segmentation-MiT-B3-UNet/blob/main/potato_pipeline_4class_colab.ipynb)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)](https://pytorch.org/)
 
 > **Proposed Hybrid Model (MiT-B3 + U-Net) for UAV Remote Sensing Potato Disease Semantic Segmentation.**  
 > Trained and executed in **Google Colab** with multi-altitude drone imagery (2m, 7m, 10m, 12m) to segment Early Blight (*Alternaria solani*) and Late Blight (*Phytophthora infestans*).
+
+---
+
+## 💾 Pre-trained Model Checkpoint (Release v1.0.0)
+
+The trained model checkpoint is available directly in the GitHub Release:
+* 📦 **Download Checkpoint:** [**`best_hybrid_model_2m.pth` (180.88 MB)**](https://github.com/modest12345678/Potato-Disease-Segmentation-MiT-B3-UNet/releases/download/v1.0.0/best_hybrid_model_2m.pth)
+* 🏷️ **Release Tag:** [`v1.0.0: Pre-trained MiT-B3 + U-Net Potato Disease Model`](https://github.com/modest12345678/Potato-Disease-Segmentation-MiT-B3-UNet/releases/tag/v1.0.0)
 
 ---
 
