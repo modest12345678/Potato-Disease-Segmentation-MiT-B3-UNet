@@ -1,0 +1,38 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyTorch large weight checkpoints (> 100MB)
+*.pth
+*.pt
+artifacts/ckpt/*.pt
+artifacts/ckpt/*.pth
+checkpoints/
+
+# Local data cache
+data/train_raw/
+data/eval_raw/
+data/train/
+data/eval/
+data/qa/
+*.zip
+*.tar.gz
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Environments & IDEs
+.env
+.venv
+env/
+venv/
+ENV/
+.vscode/
+.idea/
+
+# OS specific
+Thumbs.db
+Desktop.ini
+.DS_Store
